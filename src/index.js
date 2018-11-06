@@ -62,7 +62,7 @@ export default class VueRouter {
         this.history = new AbstractHistory(this, options.base)
         break
       default:
-        if (process.env.NODE_ENV !== 'production') {
+        if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
           assert(false, `invalid mode: ${mode}`)
         }
     }
@@ -81,7 +81,7 @@ export default class VueRouter {
   }
 
   init (app: any /* Vue component instance */) {
-    process.env.NODE_ENV !== 'production' && assert(
+    typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' && assert(
       install.installed,
       `not installed. Make sure to call \`Vue.use(VueRouter)\` ` +
       `before creating root instance.`

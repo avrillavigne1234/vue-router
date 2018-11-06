@@ -36,7 +36,7 @@ export function resolveAsyncComponents (matched: Array<RouteRecord>): Function {
 
         const reject = once(reason => {
           const msg = `Failed to resolve async component ${key}: ${reason}`
-          process.env.NODE_ENV !== 'production' && warn(false, msg)
+          typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' && warn(false, msg)
           if (!error) {
             error = isError(reason)
               ? reason

@@ -50,7 +50,7 @@ function addRouteRecord (
   matchAs?: string
 ) {
   const { path, name } = route
-  if (process.env.NODE_ENV !== 'production') {
+  if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
     assert(path != null, `"path" is required in a route configuration.`)
     assert(
       typeof route.component !== 'string',
@@ -92,7 +92,7 @@ function addRouteRecord (
     // Warn if route is named, does not redirect and has a default child route.
     // If users navigate to this route by name, the default child will
     // not be rendered (GH Issue #629)
-    if (process.env.NODE_ENV !== 'production') {
+    if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
       if (route.name && !route.redirect && route.children.some(child => /^\/?$/.test(child.path))) {
         warn(
           false,
@@ -141,7 +141,7 @@ function addRouteRecord (
   if (name) {
     if (!nameMap[name]) {
       nameMap[name] = record
-    } else if (process.env.NODE_ENV !== 'production' && !matchAs) {
+    } else if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' && !matchAs) {
       warn(
         false,
         `Duplicate named routes definition: ` +
@@ -153,7 +153,7 @@ function addRouteRecord (
 
 function compileRouteRegex (path: string, pathToRegexpOptions: PathToRegexpOptions): RouteRegExp {
   const regex = Regexp(path, [], pathToRegexpOptions)
-  if (process.env.NODE_ENV !== 'production') {
+  if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
     const keys: any = Object.create(null)
     regex.keys.forEach(key => {
       warn(!keys[key.name], `Duplicate param keys in route with path: "${path}"`)

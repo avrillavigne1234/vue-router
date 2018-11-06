@@ -25,7 +25,7 @@ export function resolveQuery (
   try {
     parsedQuery = parse(query || '')
   } catch (e) {
-    process.env.NODE_ENV !== 'production' && warn(false, e.message)
+    typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' && warn(false, e.message)
     parsedQuery = {}
   }
   for (const key in extraQuery) {

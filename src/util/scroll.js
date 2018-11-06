@@ -33,7 +33,7 @@ export function handleScroll (
     return
   }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
     assert(typeof behavior === 'function', `scrollBehavior must be a function`)
   }
 
@@ -50,7 +50,7 @@ export function handleScroll (
       shouldScroll.then(shouldScroll => {
         scrollToPosition((shouldScroll: any), position)
       }).catch(err => {
-        if (process.env.NODE_ENV !== 'production') {
+        if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
           assert(false, err.toString())
         }
       })

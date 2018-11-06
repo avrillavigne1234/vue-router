@@ -19,7 +19,7 @@ export function fillParams (
       (regexpCompileCache[path] = Regexp.compile(path))
     return filler(params || {}, { pretty: true })
   } catch (e) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
       warn(false, `missing param for ${routeMsg}: ${e.message}`)
     }
     return ''

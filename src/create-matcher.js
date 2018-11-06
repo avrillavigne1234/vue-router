@@ -33,7 +33,7 @@ export function createMatcher (
 
     if (name) {
       const record = nameMap[name]
-      if (process.env.NODE_ENV !== 'production') {
+      if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
         warn(record, `Route with name '${name}' does not exist`)
       }
       if (!record) return _createRoute(null, location)
@@ -85,7 +85,7 @@ export function createMatcher (
     }
 
     if (!redirect || typeof redirect !== 'object') {
-      if (process.env.NODE_ENV !== 'production') {
+      if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
         warn(
           false, `invalid redirect option: ${JSON.stringify(redirect)}`
         )
@@ -103,7 +103,7 @@ export function createMatcher (
     if (name) {
       // resolved named direct
       const targetRecord = nameMap[name]
-      if (process.env.NODE_ENV !== 'production') {
+      if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
         assert(targetRecord, `redirect failed: named route "${name}" not found.`)
       }
       return match({
@@ -126,7 +126,7 @@ export function createMatcher (
         hash
       }, undefined, location)
     } else {
-      if (process.env.NODE_ENV !== 'production') {
+      if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
         warn(false, `invalid redirect option: ${JSON.stringify(redirect)}`)
       }
       return _createRoute(null, location)

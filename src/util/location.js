@@ -30,7 +30,7 @@ export function normalizeLocation (
     } else if (current.matched.length) {
       const rawPath = current.matched[current.matched.length - 1].path
       next.path = fillParams(rawPath, params, `path ${current.path}`)
-    } else if (process.env.NODE_ENV !== 'production') {
+    } else if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
       warn(false, `relative params navigation requires a current route.`)
     }
     return next
